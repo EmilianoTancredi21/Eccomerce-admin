@@ -49,7 +49,7 @@ export const StoreModal = () => {
       // Realiza una solicitud POST a "/api/stores" utilizando Axios con los valores del formulario
       const response = await axios.post("/api/stores", values);
 
-      toast.success("La tienda se creó correctamente."); // Muestra un mensaje de éxito utilizando la librería toast
+      window.location.assign(`/${response.data.id}`);
     } catch (error) {
       toast.error("Algo salió mal..."); // Muestra un mensaje de error utilizando la librería toast
     } finally {
