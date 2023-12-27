@@ -32,11 +32,11 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
     try {
       setLoading(true);
       await axios.delete(`/api/${params.storeId}/billboards/${data.id}`);
-      toast.success("Billboard deleted.");
+      toast.success("Banner eliminado.");
       router.refresh();
     } catch (error) {
       toast.error(
-        "Make sure you removed all categories using this billboard first."
+        "Asegúrate de eliminar primero todas las categorías que utilizan este banner."
       );
     } finally {
       setOpen(false);
@@ -46,7 +46,7 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
 
   const onCopy = (id: string) => {
     navigator.clipboard.writeText(id);
-    toast.success("Billboard ID copied to clipboard.");
+    toast.success("Id del banner copiado al portapapeles.");
   };
 
   return (
@@ -60,24 +60,31 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant="ghost" className="h-8 w-8 p-0">
-            <span className="sr-only">Open menu</span>
+            <span className="sr-only">Abrir menú</span>
             <MoreHorizontal className="h-4 w-4" />
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
-          <DropdownMenuLabel>Actions</DropdownMenuLabel>
-          <DropdownMenuItem onClick={() => onCopy(data.id)}>
-            <Copy className="mr-2 h-4 w-4" /> Copy Id
+          <DropdownMenuLabel>Acciones</DropdownMenuLabel>
+          <DropdownMenuItem
+            onClick={() => onCopy(data.id)}
+            className="cursor-pointer"
+          >
+            <Copy className="mr-2 h-4 w-4" /> Copiar Id
           </DropdownMenuItem>
           <DropdownMenuItem
             onClick={() =>
               router.push(`/${params.storeId}/billboards/${data.id}`)
             }
+            className="cursor-pointer"
           >
-            <Edit className="mr-2 h-4 w-4" /> Update
+            <Edit className="mr-2 h-4 w-4" /> Editar
           </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => setOpen(true)}>
-            <Trash className="mr-2 h-4 w-4" /> Delete
+          <DropdownMenuItem
+            onClick={() => setOpen(true)}
+            className="cursor-pointer"
+          >
+            <Trash className="mr-2 h-4 w-4" /> Eliminar
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
